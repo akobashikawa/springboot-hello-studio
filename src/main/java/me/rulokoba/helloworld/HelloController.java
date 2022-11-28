@@ -2,6 +2,7 @@ package me.rulokoba.helloworld;
 
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +16,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class HelloController {
+	
+	@Autowired
+	private final HelloService helloService;
+	
+	public HelloController(HelloService service) {
+		this.helloService = service;
+	}
 
 	@GetMapping("")
 	public String home() {
@@ -24,7 +32,8 @@ public class HelloController {
 //	@RequestMapping(value="/hello-world", method=RequestMethod.GET)
 	@GetMapping("/hello-world")
 	public String hello() {
-		return "Hello World";
+		String message = this.helloService.helloWorld();
+		return message;
 	}
 	
 	@GetMapping(value = {"/hello-name", "/hello-name/{name}"})
@@ -32,7 +41,8 @@ public class HelloController {
 //	public String helloName(@PathVariable Optional<String> namePar) {
 		String name = namePar != null ? namePar : "Anonymous";
 //		String name = namePar.isPresent() ? namePar.get() : "Anonymous";
-		return "Hello " + name;
+		String message = this.helloService.helloName(name);
+		return message;
 	}
 	
 	@GetMapping("/hello")
@@ -44,7 +54,8 @@ public class HelloController {
 	@ResponseBody
 	public HelloResponseDTO helloDto(@RequestBody HelloRequestDTO helloReq) {
 		String name = helloReq.getName();
-		HelloResponseDTO helloRes = new HelloResponseDTO("Hello " + name);
+		String message = this.helloService.helloName(name);
+		HelloResponseDTO helloRes = new HelloResponseDTO(message);
 		return helloRes;
 	}
 	
@@ -52,7 +63,8 @@ public class HelloController {
 	@ResponseBody
 	public ResponseEntity<HelloResponseDTO> helloDto2(@RequestBody Optional<HelloRequestDTO> helloReq) {
 		String name = helloReq.isEmpty() ? "Anonymous" : helloReq.get().getName();
-		HelloResponseDTO helloRes = new HelloResponseDTO("Hello " + name);
+		String message = this.helloService.helloName(name);
+		HelloResponseDTO helloRes = new HelloResponseDTO(message);
 		return ResponseEntity.ok(helloRes);
 	}
 }
