@@ -24,10 +24,10 @@ public class HelloController {
 		this.helloService = service;
 	}
 
-	@GetMapping("")
-	public String home() {
-		return "Hello World Studio";
-	}
+//	@GetMapping("")
+//	public String home() {
+//		return "Hello World Studio";
+//	}
 	
 //	@RequestMapping(value="/hello-world", method=RequestMethod.GET)
 	@GetMapping("/hello-world")
@@ -37,7 +37,7 @@ public class HelloController {
 	}
 	
 	@GetMapping(value = {"/hello-name", "/hello-name/{name}"})
-	public String helloName(@PathVariable(required = false) String namePar) {
+	public String helloName(@PathVariable(value = "name", required = false) String namePar) {
 //	public String helloName(@PathVariable Optional<String> namePar) {
 		String name = namePar != null ? namePar : "Anonymous";
 //		String name = namePar.isPresent() ? namePar.get() : "Anonymous";
