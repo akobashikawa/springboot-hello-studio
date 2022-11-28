@@ -1,3 +1,3 @@
-INSERT INTO PERSON SET id=1, name='Alice';
-INSERT INTO PERSON SET id=2, name='Beatrice';
-INSERT INTO PERSON SET id=3, name='Clarice';
+INSERT INTO PERSON VALUES(1, 'Alice');
+INSERT INTO PERSON VALUES(2, 'Beatrice');
+INSERT INTO PERSON VALUES(3, 'Clarice');
