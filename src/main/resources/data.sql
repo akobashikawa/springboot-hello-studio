@@ -1,3 +1,3 @@
-INSERT INTO PERSON VALUES(1, 'Alice');
-INSERT INTO PERSON VALUES(2, 'Beatrice');
-INSERT INTO PERSON VALUES(3, 'Clarice');
+INSERT INTO names VALUES(1, 'Alice');
+INSERT INTO names VALUES(2, 'Beatrice');
+INSERT INTO names VALUES(3, 'Clarice');

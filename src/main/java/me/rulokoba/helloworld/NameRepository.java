@@ -2,6 +2,6 @@ package me.rulokoba.helloworld;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface PersonRepository extends JpaRepository<Person, Long> {
+public interface NameRepository extends JpaRepository<Name, Long> {
 
 }

@@ -10,24 +10,24 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class PersonController {
+public class NameController {
 
-	private final PersonService personService;
+	private final NameService personService;
 
-	public PersonController(PersonService personService) {
+	public NameController(NameService personService) {
 		this.personService = personService;
 	}
 	
 	@GetMapping(value = "/people", produces = {MediaType.APPLICATION_JSON_VALUE})
-	public List<Person> getAll() {
-		List<Person> result = personService.findAll();
+	public List<Name> getAll() {
+		List<Name> result = personService.findAll();
 		return result;
 	}
 	
 	@PostMapping(value = "/people", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
 	@ResponseBody
-	public Person add(@RequestBody Person person) {
-		Person result = personService.save(person);
+	public Name add(@RequestBody Name person) {
+		Name result = personService.save(person);
 		return result;
 	}
 	

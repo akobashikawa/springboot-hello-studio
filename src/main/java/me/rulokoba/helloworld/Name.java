@@ -7,8 +7,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="person")
-public class Person {
+@Table(name="names")
+public class Name {
 
 	private @Id @GeneratedValue Long id;
 	

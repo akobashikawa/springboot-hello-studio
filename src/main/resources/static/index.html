@@ -2,12 +2,15 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8" />
-	<title>Hello World</title>
+	<title>Hello World Studio</title>
 </head>
 <body>
-	<h1>Hello World</h1>
+	<h1>Hello World Studio</h1>
 	
 	<ul>
+		<li>
+			<a href="/h2-console/login.jsp">h2-console</a>
+		</li>
 		<li>
 			<a href="/hello-world">hello-world</a>
 		</li>
@@ -17,6 +20,47 @@
 		<li>
 			<a href="/hello-name/Antonio">hello-name/Antonio</a>
 		</li>
+		<li>
+			<a href="/hello">hello</a>
+		</li>
+		<li>
+			<a href="/hello?name=Antonio">hello?name=Antonio</a>
+		</li>
+		<li>
+			<form action="/hello-form" modelAttribute="hello" method="POST">
+				<p>hello-form</p>
+				<input type="text" name="name" placeholder="Name"/>
+				<button>Submit</button>
+			</form>
+		</li>
+		<li>
+			<form id="form-hello-json">
+				<p>hello-json</p>
+				<input type="text" name="name" placeholder="Name"/>
+				<button>Submit</button>
+			</form>
+		</li>
 	</ul>
+	
+	<script>
+	const form = document.getElementById("form-hello-json");
+	
+	form.addEventListener("submit", async function(event) {
+		const formData = new FormData(event.target);
+		const dataValues = Object.fromEntries(formData.entries());
+		const url = "/hello-json";
+		const response = await fetch(url, {
+			method: "POST",
+			headers: {
+				"Accept": "application/json",
+				"Content-Type": "application/json"
+			}
+		})
+		const data = await response.json();
+		
+    	console.log({ data });
+		event.preventDefault();
+	});
+	</script>
 </body>
 </html>
