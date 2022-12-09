@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Hello Json 2</title>
+</head>
+<body>
+	<h1>Hello Json 2</h1>
+	
+	<form id="form-hello-json">
+		<input type="text" name="name" placeholder="Name"/>
+		<button type="button" id="button-send">Send</button>
+	</form>
+	<div id="result">...</div>
+	
+	<script>
+	const form = document.getElementById("form-hello-json");
+	const buttonSend = document.getElementById("button-send");
+	const result = document.getElementById("result");
+	
+	buttonSend.addEventListener("click", async function(event) {
+		const formData = new FormData(form);
+		const dataValues = Object.fromEntries(formData.entries());
+		console.log(dataValues);
+		const body = JSON.stringify(dataValues);
+		const url = "/hello-json-2";
+		
+		try {
+			const response = await fetch(url, {
+				method: "POST",
+				headers: {
+					"Accept": "application/json",
+					"Content-Type": "application/json"
+				},
+				body,
+			});
+			
+			const data = await response.json();
+			
+			result.innerHTML = data.hello;
+		} catch(error) {
+			console.log(error);
+		}
+		
+	});
+	</script>
+</body>
+</html>

@@ -86,16 +86,17 @@ public class HelloRestController {
 	}
 
 	/**
-	 * Show json/xml hello greeting to name especified in json form
+	 * Show json/xml hello greeting to name especified in json form.
+	 * Backend using ResponseEntity.
 	 * 
 	 * @param helloReq
 	 * @return
 	 */
-	@PostMapping(value = "/hello-json2", produces = { MediaType.APPLICATION_JSON_VALUE,
+	@PostMapping(value = "/hello-json-2", produces = { MediaType.APPLICATION_JSON_VALUE,
 			MediaType.APPLICATION_XML_VALUE })
 	@ResponseBody
 	public ResponseEntity<HelloResponseDTO> helloJson2(@RequestBody Optional<HelloRequestDTO> helloReq) {
-		String name = helloReq.isEmpty() ? "Anonymous" : helloReq.get().getName();
+		String name = helloReq.isEmpty() ? "" : helloReq.get().getName();
 		String message = this.helloService.helloName(name);
 		HelloResponseDTO helloRes = new HelloResponseDTO(message);
 		return ResponseEntity.ok(helloRes);
