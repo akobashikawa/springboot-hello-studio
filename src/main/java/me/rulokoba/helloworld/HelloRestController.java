@@ -50,8 +50,8 @@ public class HelloRestController {
 	@GetMapping(value = { "/hello-name", "/hello-name/{name}" })
 	public String helloName(@PathVariable(value = "name", required = false) String namePar) {
 //	public String helloName(@PathVariable Optional<String> namePar) {
-		String name = namePar != null ? namePar : "Anonymous";
-//		String name = namePar.isPresent() ? namePar.get() : "Anonymous";
+//		String name = namePar.isPresent() ? namePar.get() : null;
+		String name = namePar;
 		String message = this.helloService.helloName(name);
 		return message;
 	}
@@ -63,8 +63,9 @@ public class HelloRestController {
 	 * @return
 	 */
 	@GetMapping("/hello")
-	public String hello(@RequestParam(value = "name", defaultValue = "Anonymous") String name) {
-		return "Hello " + name;
+	public String hello(@RequestParam(value = "name", defaultValue = "") String name) {
+		String message = this.helloService.helloName(name);
+		return message;
 	}
 
 	/**

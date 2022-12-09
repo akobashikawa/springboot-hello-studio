@@ -10,6 +10,9 @@ public class HelloService {
 	}
 	
 	public String helloName(String name) {
+		if ( name == null || name.equals("") ) {
+			name = "Anonymous";
+		}
 		return "Hello " + name;
 	}
 	
