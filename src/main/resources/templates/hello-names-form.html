@@ -1,0 +1,25 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Hello Names Form</title>
+</head>
+<body>
+	<h1>Hello Names Form</h1>
+	
+	<form action="/hello-names-form" method="POST">
+		<input type="text" name="name" placeholder="Name"/>
+		<button>Send</button>
+	</form>
+	
+	<p>
+		<span th:if="${isPost}" th:text="${message}" />
+	</p>
+	
+	<ul>
+		<li th:each="name: ${names}">
+			<span th:text="${name.name}" />
+		</li>
+	</ul>
+</body>
+</html>

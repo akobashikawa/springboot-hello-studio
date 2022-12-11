@@ -7,21 +7,21 @@ import org.springframework.stereotype.Service;
 @Service
 public class NameServiceImpl implements NameService {
 	
-	private NameRepository personRepository;
+	private NameRepository nameRepository;
 
-	public NameServiceImpl(NameRepository personRepository) {
+	public NameServiceImpl(NameRepository nameRepository) {
 		super();
-		this.personRepository = personRepository;
+		this.nameRepository = nameRepository;
 	}
 
 	@Override
 	public List<Name> findAll() {
-		return personRepository.findAll();
+		return nameRepository.findAll();
 	}
 
 	@Override
-	public Name save(Name person) {
-		return personRepository.save(person);
+	public Name save(Name name) {
+		return nameRepository.save(name);
 	}
 
 }
