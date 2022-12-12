@@ -1,12 +1,15 @@
 package me.rulokoba.helloworld;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,9 +22,13 @@ public class HelloRestController {
 
 	@Autowired
 	private final HelloService helloService;
+	
+	@Autowired
+	private final NameService nameService;
 
-	public HelloRestController(HelloService service) {
-		this.helloService = service;
+	public HelloRestController(HelloService helloService, NameService nameService) {
+		this.helloService = helloService;
+		this.nameService = nameService;
 	}
 
 //	@GetMapping("")
@@ -100,5 +107,28 @@ public class HelloRestController {
 		String message = this.helloService.helloName(name);
 		HelloResponseDTO helloRes = new HelloResponseDTO(message);
 		return ResponseEntity.ok(helloRes);
+	}
+	
+	/**
+	 * Show json/xml hello greeting to name especified in json form
+	 * 
+	 * @param helloReq
+	 * @return
+	 */
+	@CrossOrigin(origins = "*")
+	@PostMapping(value = "/hello-names-json", produces = { MediaType.APPLICATION_JSON_VALUE,
+			MediaType.APPLICATION_XML_VALUE })
+	@ResponseBody
+	public HelloResponseDTO helloNamesJson(@RequestBody HelloRequestDTO helloReq) {
+		String name = helloReq.getName();
+		boolean noName = (name == null) || name.equals("");
+		
+		if (!noName) {
+			this.nameService.addName(name);
+		}
+		
+		String message = this.helloService.helloName(name);
+		HelloResponseDTO helloRes = new HelloResponseDTO(message);
+		return helloRes;
 	}
 }

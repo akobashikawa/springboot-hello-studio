@@ -18,13 +18,13 @@ public class NameController {
 		this.nameService = nameService;
 	}
 	
-	@GetMapping(value = "/people", produces = {MediaType.APPLICATION_JSON_VALUE})
+	@GetMapping(value = "/names", produces = {MediaType.APPLICATION_JSON_VALUE})
 	public List<NameEntity> getAll() {
 		List<NameEntity> result = nameService.findAll();
 		return result;
 	}
 	
-	@PostMapping(value = "/people", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
+	@PostMapping(value = "/names", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
 	@ResponseBody
 	public NameEntity add(@RequestBody NameEntity name) {
 		NameEntity result = nameService.save(name);

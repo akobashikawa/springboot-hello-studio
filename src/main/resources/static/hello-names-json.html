@@ -2,10 +2,10 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8" />
-	<title>Hello Json 2</title>
+	<title>Hello Names Json</title>
 </head>
 <body>
-	<h1>Hello Json 2</h1>
+	<h1>Hello Names Json</h1>
 	
 	<form id="form-hello-json">
 		<input type="text" name="name" placeholder="Name"/>
@@ -14,6 +14,8 @@
 	<p>
 		<span id="result">...</span>
 	</p>
+	<ul id="list-names">
+	</ul>
 	
 	<script>
 	const form = document.getElementById("form-hello-json");
@@ -25,7 +27,7 @@
 		const dataValues = Object.fromEntries(formData.entries());
 		console.log(dataValues);
 		const body = JSON.stringify(dataValues);
-		const url = "/hello-json-2";
+		const url = "/hello-names-json";
 		
 		try {
 			const response = await fetch(url, {
@@ -40,11 +42,37 @@
 			const data = await response.json();
 			
 			result.innerHTML = data.hello;
+			
+			await getNames();
 		} catch(error) {
 			console.log(error);
 		}
 		
 	});
+	
+	async function getNames() {
+		try {
+			const url = "/names";
+			const response = await fetch(url, {
+				method: "GET",
+				headers: {
+					"Content-Type": "application/json"
+				}
+			});
+			
+			const data = await response.json();
+			
+			const namesList = document.getElementById("list-names");
+			let html = '';
+			for (let item of data) {
+				html += `<li>${item.name}</li>`;
+			}
+			namesList.innerHTML = html;
+		} catch(error) {
+			console.log(error);
+		}
+	}
+	
 	</script>
 </body>
 </html>
