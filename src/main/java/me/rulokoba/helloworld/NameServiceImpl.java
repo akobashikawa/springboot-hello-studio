@@ -15,12 +15,12 @@ public class NameServiceImpl implements NameService {
 	}
 
 	@Override
-	public List<Name> findAll() {
+	public List<NameEntity> findAll() {
 		return nameRepository.findAll();
 	}
 
 	@Override
-	public Name save(Name name) {
+	public NameEntity save(NameEntity name) {
 		return nameRepository.save(name);
 	}
 

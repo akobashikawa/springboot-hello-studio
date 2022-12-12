@@ -8,7 +8,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class HelloController {
@@ -47,7 +46,7 @@ public class HelloController {
 	 */
 	@GetMapping(value = "/hello-names-form")
 	public String helloNamesFormGet(Model model) {
-		List<Name> names = this.nameService.findAll();
+		List<NameEntity> names = this.nameService.findAll();
 		model.addAttribute("names", names);
 		return "hello-names-form";
 	}
@@ -74,7 +73,7 @@ public class HelloController {
 			this.nameService.addName(name);
 		}
 		
-		List<Name> names = this.nameService.findAll();
+		List<NameEntity> names = this.nameService.findAll();
 		model.addAttribute("names", names);
 		return "hello-names-form";
 	}

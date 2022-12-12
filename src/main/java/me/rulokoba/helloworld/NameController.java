@@ -12,22 +12,22 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class NameController {
 
-	private final NameService personService;
+	private final NameService nameService;
 
-	public NameController(NameService personService) {
-		this.personService = personService;
+	public NameController(NameService nameService) {
+		this.nameService = nameService;
 	}
 	
 	@GetMapping(value = "/people", produces = {MediaType.APPLICATION_JSON_VALUE})
-	public List<Name> getAll() {
-		List<Name> result = personService.findAll();
+	public List<NameEntity> getAll() {
+		List<NameEntity> result = nameService.findAll();
 		return result;
 	}
 	
 	@PostMapping(value = "/people", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
 	@ResponseBody
-	public Name add(@RequestBody Name person) {
-		Name result = personService.save(person);
+	public NameEntity add(@RequestBody NameEntity name) {
+		NameEntity result = nameService.save(name);
 		return result;
 	}
 	

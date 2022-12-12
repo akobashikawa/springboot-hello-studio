@@ -9,7 +9,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="names")
-public class Name {
+public class NameEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,7 +19,7 @@ public class Name {
 	@Column(name="name")
 	private String name;
 	
-	public Name() {}
+	public NameEntity() {}
 	
 	public Long getId() {
 		return id;
